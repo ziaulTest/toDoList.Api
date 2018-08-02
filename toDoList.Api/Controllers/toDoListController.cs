@@ -7,29 +7,37 @@ using toDoList.Api.Models;
 
 namespace toDoList.Api.Controllers
 {
-   
+   [Route("api/GetToDoLists")]
     public class ToDoListController : Controller
     {
-        [HttpGet("api/GetToDoList")]
-        public JsonResult GetToDoLists()
-        {
-            //created a new instance of the datastore and will be returning the current to do list. 
-            return new JsonResult(ToDoListDataStore.Current.ToDoList);
-            //return new JsonResult(new List<object>()
-            //{
-
-                    //new {id=1, task="need to add somthing here", priority = "High", status = "done" },
-                    //new {id=2, task="need to add somthing or it wont work", priority = "Low", status = "Started" },
-            //}
-            //);
+        [HttpGet]
+        public IActionResult GetToDoLists()
+        { 
+            return Ok(ToDoListDataStore.Current.ToDoList);
         }
 
-        [HttpGet("api/GetToDoList/{id}")]
-        public JsonResult GetToDoList()
+        [HttpGet("{id}")]
+        public IActionResult GetToDoList(int id)
         {
-
-
+            // find list 
+            var listToReturn = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
+            if (listToReturn == null)
+            {
+                return NotFound();
+            }
+            return Ok(listToReturn);
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteToDoList(int id)
+        {
+            // find list 
+            var listToReturn = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
+            if (listToReturn == null)
+            {
+                return NotFound();
+            }
+            return Ok(listToReturn);
+        }
     }
 }

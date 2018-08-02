@@ -22,7 +22,6 @@ namespace toDoList.Api.Models
                     task = "Wake up at 9am",
                     status = "In Progress"
                 },
-
                 new toDoListDto()
                 {
                     Id = 2,

@@ -1,17 +1,13 @@
 using System;
-using Moq;
-using System.Web.Http.Results;
-using System.Collections.Generic;
-using Xunit;
-using Xunit.Sdk;
+using NUnit.Framework;
+using Assert = NUnit.Framework.Assert;
 
 namespace toDoList.UnitTests
 {
-    
     public class UnitTest1
     {
-        [Fact]                                                   
-        public void MyFirstTest()
+        [Test]
+        public void gdljhgldx()
         {
             Console.WriteLine("gedgfdsg");
             Assert.True(true);
