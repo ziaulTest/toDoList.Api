@@ -5,18 +5,11 @@ using System.Threading.Tasks;
 
 namespace toDoList.Api.Models
 {
-    public class toDoListDto
+    public class SubTasksDto
     {
         public int Id { get; set; }
-        public string task { get; set; }  
+        public string task { get; set; }
         public string priority { get; set; }
         public string status { get; set; }
-
-        public int NumberOfSubTasks => SubTask.Count;
-
-        public ICollection<SubTasksDto> SubTask { get; set; }
-            = new List<SubTasksDto>();
-
     }
 }
-

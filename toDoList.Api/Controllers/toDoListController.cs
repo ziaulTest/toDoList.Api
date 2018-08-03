@@ -27,17 +27,5 @@ namespace toDoList.Api.Controllers
             }
             return Ok(listToReturn);
         }
-
-        [HttpDelete("{id}")]
-        public IActionResult DeleteToDoList(int id)
-        {
-            // find list 
-            var listToReturn = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
-            if (listToReturn == null)
-            {
-                return NotFound();
-            }
-            return Ok(listToReturn);
-        }
     }
 }
