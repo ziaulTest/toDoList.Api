@@ -7,12 +7,13 @@ using toDoList.Api.Models;
 
 namespace toDoList.Api.Controllers
 {
-   [Route("api/ToDoLists")]
+    [Route("api/ToDoLists")]
     public class ToDoListController : Controller
     {
+
         [HttpGet]
         public IActionResult GetToDoLists()
-        { 
+        {
             return Ok(ToDoListDataStore.Current.ToDoList);
         }
 
@@ -25,11 +26,13 @@ namespace toDoList.Api.Controllers
             {
                 return NotFound();
             }
+
             return Ok(listToReturn);
+            
         }
 
-        [HttpPost("{id}", Name = "PostToDoLists")]
-        public IActionResult PostToDoList(int id, [FromBody] toDoListDto ReturnList )
+        [HttpPost("{id}", Name = "Post")]
+        public IActionResult PostToDoList(int id, [FromBody] toDoListDto ReturnList)
         {
             if (ReturnList == null)
             {
@@ -45,23 +48,38 @@ namespace toDoList.Api.Controllers
             };
 
             ToDoListDataStore.Current.ToDoList.Add(final);
-
-           //ReturnList.ToDolistCollection.Add(final);
-            return CreatedAtRoute("Get",final);
+            return CreatedAtRoute("Get", final);
         }
 
-        //[HttpPatch("Delete/{id}")]
-        //public IActionResult DeleteToDoList(int id)
-        //{
+        [HttpPatch("{id}", Name = "Patch")]
+        public IActionResult PartiallyUpdate(int id, [FromBody] toDoListDto returnList)
+        {
+            var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
 
-        //    var ToDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
+            if (toDoListItem == null)
+            {
+                return BadRequest();
+            }
 
-        //    if (ToDoListItem == null)
-        //    {
-        //        return BadRequest();
-        //    }
+            returnList.task = toDoListItem.task;
+            returnList.priority = toDoListItem.priority;
+        
+            return Ok();
 
+        }
 
-        //}
+        [HttpDelete("{id}" , Name = "Delete")]
+        public IActionResult DeleteList(int id)
+        {
+            var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
+
+            if (toDoListItem == null)
+            {
+                return NotFound();
+            }
+
+            toDoListItem.ToDolistCollection.Remove(toDoListItem);
+            return Ok(toDoListItem);
+        }
     }
 }
