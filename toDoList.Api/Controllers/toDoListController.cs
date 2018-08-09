@@ -55,17 +55,16 @@ namespace toDoList.Api.Controllers
         public IActionResult PartiallyUpdate(int id, [FromBody] toDoListDto returnList)
         {
             var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
-
+            
             if (toDoListItem == null)
             {
                 return BadRequest();
             }
+            toDoListItem.task = returnList.task;
+            toDoListItem.priority = returnList.priority;
 
-            returnList.task = toDoListItem.task;
-            returnList.priority = toDoListItem.priority;
-        
+            ToDoListDataStore.Current.ToDoList.Add(returnList);
             return Ok();
-
         }
 
         [HttpDelete("{id}" , Name = "Delete")]
@@ -78,8 +77,11 @@ namespace toDoList.Api.Controllers
                 return NotFound();
             }
 
-            toDoListItem.ToDolistCollection.Remove(toDoListItem);
-            return Ok(toDoListItem);
+            ToDoListDataStore.Current.ToDoList.Remove(toDoListItem);
+
+
+            return Ok();
+
         }
     }
 }

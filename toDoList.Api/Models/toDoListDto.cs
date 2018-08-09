@@ -11,7 +11,6 @@ namespace toDoList.Api.Models
         public string task { get; set; }  
         public string priority { get; set; }
         public string status { get; set; }
-        public ICollection<toDoListDto> ToDolistCollection { get; set; } = new List<toDoListDto>();
     }
 }
 
