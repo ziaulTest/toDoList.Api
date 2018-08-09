@@ -7,7 +7,7 @@ namespace toDoList.Api.Models
 {
     public class ToDoListDataStore
     {
-        public static ToDoListDataStore Current { get;} = new ToDoListDataStore();
+        public static ToDoListDataStore Current { get; set; } = new ToDoListDataStore();
 
         public List<toDoListDto> ToDoList { get; set; }
 
@@ -21,17 +21,6 @@ namespace toDoList.Api.Models
                     priority = "high",
                     task = "Wake up at 9am",
                     status = "In Progress",
-                    SubTask = new List<SubTasksDto>()
-                    {
-                    new SubTasksDto() {
-                    Id = 1,
-                    task =  "go toilet earlier so i can be in bed earlier",
-                    priority = "High" },
-                     new SubTasksDto() {
-                     Id = 2,
-                     task =  "Drink less water",
-                     priority = "Medium" },
-            }
                 },
                 new toDoListDto()
                 {

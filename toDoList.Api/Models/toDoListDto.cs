@@ -11,12 +11,7 @@ namespace toDoList.Api.Models
         public string task { get; set; }  
         public string priority { get; set; }
         public string status { get; set; }
-
-        public int NumberOfSubTasks => SubTask.Count;
-
-        public ICollection<SubTasksDto> SubTask { get; set; }
-            = new List<SubTasksDto>();
-
+        public ICollection<toDoListDto> ToDolistCollection { get; set; } = new List<toDoListDto>();
     }
 }
 

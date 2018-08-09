@@ -7,7 +7,7 @@ using toDoList.Api.Models;
 
 namespace toDoList.Api.Controllers
 {
-   [Route("api/GetToDoLists")]
+   [Route("api/ToDoLists")]
     public class ToDoListController : Controller
     {
         [HttpGet]
@@ -16,7 +16,7 @@ namespace toDoList.Api.Controllers
             return Ok(ToDoListDataStore.Current.ToDoList);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "Get")]
         public IActionResult GetToDoList(int id)
         {
             // find list 
@@ -27,5 +27,41 @@ namespace toDoList.Api.Controllers
             }
             return Ok(listToReturn);
         }
+
+        [HttpPost("{id}", Name = "PostToDoLists")]
+        public IActionResult PostToDoList(int id, [FromBody] toDoListDto ReturnList )
+        {
+            if (ReturnList == null)
+            {
+                return BadRequest();
+            }
+
+            var final = new toDoListDto()
+            {
+                Id = ReturnList.Id,
+                priority = ReturnList.priority,
+                status = ReturnList.status,
+                task = ReturnList.task
+            };
+
+            ToDoListDataStore.Current.ToDoList.Add(final);
+
+           //ReturnList.ToDolistCollection.Add(final);
+            return CreatedAtRoute("Get",final);
+        }
+
+        //[HttpPatch("Delete/{id}")]
+        //public IActionResult DeleteToDoList(int id)
+        //{
+
+        //    var ToDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
+
+        //    if (ToDoListItem == null)
+        //    {
+        //        return BadRequest();
+        //    }
+
+
+        //}
     }
 }
