@@ -7,7 +7,7 @@ namespace toDoList.Api.Models
 {
     public class ToDoListDataStore
     {
-        public static ToDoListDataStore Current { get;} = new ToDoListDataStore();
+        public static ToDoListDataStore Current { get; set; } = new ToDoListDataStore();
 
         public List<toDoListDto> ToDoList { get; set; }
 
@@ -20,7 +20,7 @@ namespace toDoList.Api.Models
                     Id = 1,
                     priority = "high",
                     task = "Wake up at 9am",
-                    status = "In Progress"
+                    status = "In Progress",
                 },
                 new toDoListDto()
                 {

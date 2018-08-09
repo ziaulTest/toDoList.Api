@@ -7,10 +7,9 @@ namespace toDoList.UnitTests
     public class UnitTest1
     {
         [Test]
-        public void gdljhgldx()
+        public void Given_A_ToDolist__When__A_Request_Is_Made_To__Call_The_List__Then__A_200_Is_Returned()
         {
-            Console.WriteLine("gedgfdsg");
-            Assert.True(true);
+
         }
     }
 }
