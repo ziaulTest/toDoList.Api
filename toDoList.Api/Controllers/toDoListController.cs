@@ -62,8 +62,7 @@ namespace toDoList.Api.Controllers
             }
             toDoListItem.task = returnList.task;
             toDoListItem.priority = returnList.priority;
-
-            ToDoListDataStore.Current.ToDoList.Add(returnList);
+            
             return Ok();
         }
 
@@ -79,8 +78,7 @@ namespace toDoList.Api.Controllers
 
             ToDoListDataStore.Current.ToDoList.Remove(toDoListItem);
 
-
-            return Ok();
+            return NoContent();
 
         }
     }
